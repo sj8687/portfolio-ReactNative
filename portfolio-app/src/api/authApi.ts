@@ -23,7 +23,6 @@ export async function login({ username, password }: LoginPayload): Promise<Login
     });
     return data;
   } catch (err) {
-    // Fallback so the UI can be demoed even without backend-demo running.
     if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
       return { token: 'demo-token-offline', user: { username } };
     }
