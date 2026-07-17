@@ -13,12 +13,17 @@ import Button from '../components/Button';
 import { useAuth } from '../context/AuthContext';
 import { colors, spacing, typography } from '../theme';
 import { isTablet } from '../utils/responsive';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function LoginScreen() {
   const { login, isLoading, error } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState<string | null>(null);
+
+    const navigation = useNavigation();
+
 
   const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
@@ -28,6 +33,9 @@ export default function LoginScreen() {
     setLocalError(null);
     try {
       await login({ username: username.trim(), password });
+
+// console.log(navigation.getState().routeNames);
+
     } catch {
       // error surfaced via context
     }
